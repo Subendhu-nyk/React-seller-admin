@@ -1,23 +1,18 @@
-import logo from './logo.svg';
+import React,{useState} from 'react';
 import './App.css';
-
+import AddProduct from './Components/AddProducts/AddProduct';
+import ProductList from './Components/AddProducts/ProductList';
 function App() {
+  const [productList,setProductList]=useState([])
+  const AddProductHandler=(id,price,name,category)=>{
+    setProductList((prev)=>{
+      return [...prev,{product_id:id,price:price,name:name,category:category,id:Math.random().toString()}]
+    })
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <AddProduct onAddProduct={AddProductHandler}/>
+    <ProductList products={productList} />
     </div>
   );
 }
